@@ -8,7 +8,7 @@
     <p>Количество кликов:
       <span>{{ clicks }}</span>
     </p>
-    <button @click="click">
+    <button @click="click()">
       Кликнуть
     </button>
 
@@ -16,7 +16,7 @@
     <p>Цена апгрейда:
       <span>{{ upgradeCost }}</span>
     </p>
-    <button @click="buyPowerUpgrade">
+    <button @click="buyPowerUpgrade()">
       Купить апгрейд
     </button>
 
@@ -25,7 +25,7 @@
 
 <script>
 export default {
-  data: () => {
+  data() {
     return {
       money: 0,
       clicks: 0,
@@ -38,19 +38,18 @@ export default {
   },
   methods: {
     click() {
-      if (this.clicks >= 5) {
-        this.money += this.MONEY_INCOME;
-        this.clicks = 0;
+      if (this.clicks % 5 == 0) {
+        this.money += this.MONEY_INCOME
       }
-      this.clicks += this.clickPower;
+      this.clicks += this.clickPower
     },
     buyPowerUpgrade() {
       if (this.money < this.upgradeCost) {
         return alert('Нехватает средств')
       }
-      this.clickPower += this.CLICK_UPGRADE;
+      this.clickPower += this.CLICK_UPGRADE
       this.money -= this.upgradeCost
-      this.upgradeCost *= 2;
+      this.upgradeCost *= 2
     }
 
   }
